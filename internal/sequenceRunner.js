@@ -17,12 +17,13 @@ export class SequenceRunner extends EventTarget {
   preloadedSequence;
   main;
 
-  constructor(sequences) {
+  constructor(sequences, startContent) {
 
     super()
 
     this.main = document.querySelector("main");
     this.sequences = sequences
+    this.startContent = startContent
 
     this.setFilter(undefined)
 
@@ -66,7 +67,7 @@ export class SequenceRunner extends EventTarget {
     }
 
     const nextSequenceId = selectNextSequenceId(
-      this.currentSequence ? Number.parseInt(this.sequencesFiltered[this.currentSequence.sequenceId].content) - 1 : undefined,
+      this.currentSequence ? this.sequencesFiltered[this.currentSequence.sequenceId].nextContent : undefined,
       this.sequencesFiltered
     );
 
@@ -79,7 +80,7 @@ export class SequenceRunner extends EventTarget {
       throw "preload called while already preloading"
     }
 
-    //console.log("preloading", sequenceIdToLoad)
+    console.log("preloading", this.sequencesFiltered[sequenceIdToLoad])
     const iframe = await loadIframe(this.sequencesFiltered[sequenceIdToLoad].url, this.main)
     iframe.style = "z-index:-99";
 
@@ -117,8 +118,12 @@ export class SequenceRunner extends EventTarget {
 
   async restart() {
 
-    const sequenceId = 0// this.currentFilter ? 0 : Math.floor(Math.random() * this.sequencesFiltered.length)
-    await this.preload(sequenceId)
+    const startContentSequences = this.sequencesFiltered.filter(s => s.content === this.startContent)
+    if (startContentSequences.length <= 0)
+      console.error("Can't find start sequence with content:", this.startContent, "sequences: ", this.sequences)
+    const sequence = startContentSequences[Math.floor(Math.random() * startContentSequences.length)]
+    const globalSequenceId = this.sequencesFiltered.indexOf(sequence)
+    await this.preload(globalSequenceId)
 
     this.activatePreloaded()
 
@@ -133,16 +138,18 @@ export class SequenceRunner extends EventTarget {
 
 function selectNextSequenceId(content, sequences) {
 
-  sequences.forEach(seq => { seq.count = Math.max(1, seq.count) })
+  console.log("find seq", content, sequences)
   const matchingSequenceIds = sequences
     .map((seq, index) => index) // Map each sequence to an object with the sequence and its index
     .filter((seqId) => {
       // Filter based on the content
       return (
-        Number.parseInt(sequences[seqId].content) === content
+        sequences[seqId].content.toString() === content
       );
     });
+  console.log(matchingSequenceIds)
 
+  sequences.forEach(seq => { seq.count = Math.max(1, seq.count) })
   const lowestCount = matchingSequenceIds
     .map(seqId => sequences[seqId].count)
     .reduce((prev, curr) => {
