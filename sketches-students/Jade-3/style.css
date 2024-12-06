@@ -1,0 +1,172 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin-top: -350px;
+}
+
+
+
+
+#loser-image.hidden {
+    display: none;
+}
+
+#loser-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 9999;
+}
+
+#winner-image.hidden {
+    display: none;
+}
+
+#winner-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 9999;
+       
+}
+
+
+
+.full-screen-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    margin-top: 550px;
+    width: 100%;
+    height: 100vh;
+}
+
+.flex-container {
+    display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap:wrap;
+       
+}
+
+.clickable {
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.second-container img.hidden {
+    display: none;
+}
+
+#cadre6 {
+    margin-left: 25px;
+}
+
+.card{
+
+    position:relative;
+    transform-style: preserve-3d;
+}
+
+
+.card-img{
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    position: absolute;
+    top:0;
+    left:0;
+    backface-visibility: hidden;
+}
+
+
+
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    75% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(10px);
+    }
+}
+
+
+@keyframes rotateAndExit {
+    0% {
+        transform: rotateY(0deg) translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: rotateY(180deg) translateY(10vh);
+      
+    }
+
+    100% {
+        transform: rotateY(360deg) translateY(100vh);
+     
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+.clickable {
+    transition: all 0.5s ease-in-out;
+    transform-origin: center;
+
+}
+.clicked{
+    z-index: 100;
+}
+.clickable:hover:not(.clicked) {
+    animation: shake 0.5s ease forwards;
+}
+.exit {
+    animation: rotateAndExit 1s forwards;
+}
+
+.show-card {
+    animation: rotate 1s forwards;
+}

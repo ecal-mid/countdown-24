@@ -1,0 +1,97 @@
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 400px;
+    height: 60vh;
+    /* Réduire la hauteur du conteneur */
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px;
+    /* L'effet de perspective sur le conteneur */
+}
+
+.porte {
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* Positionner la porte à droite */
+    width: 100%;
+    height: 100%;
+    /* Réduire la hauteur de la porte */
+    background-color: white;
+    /* Porte blanche */
+    cursor: grab;
+    transform-origin: right center;
+    /* La porte pivote autour de son côté droit */
+    transition: transform 1s ease-out;
+    /* Transition pour la rotation fluide */
+    transform-style: preserve-3d;
+    /* Permet de manipuler les éléments en 3D */
+    z-index: 2;
+    /* La porte reste au-dessus du fond gris */
+        box-shadow: 0 10px 30px rgb(255, 255, 255);
+}
+
+.porte .cache {
+    border-radius: 20px;
+    background-color: black;
+    /* L'arrière de la porte est noir */
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    backface-visibility: hidden;
+    /* Cache l'arrière de la porte pendant le flip */
+}
+
+.fond-gris {
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(252, 255, 193);
+    width: 95%;
+    height: 95%;
+    visibility: hidden;
+    z-index: 1;
+    /* Effet de lumière autour du fond */
+    box-shadow: 0 0 100px rgba(252, 255, 255), 0 0 80px rgba(255, 255, 255);
+
+    /* Dégradé pour simuler une lumière éclatante autour du fond */
+    background: radial-gradient(circle, rgba(255, 255, 255) 40%, rgb(255, 255, 255));
+}
+
+.chiffre {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 25em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: pink;
+    visibility: hidden;
+    /* Le chiffre est caché au départ */
+    transition: visibility 0.3s ease-out;
+    /* Le chiffre devient visible lorsqu'il est découvert */
+    z-index: 3;
+    /* Le chiffre reste au-dessus de tout */
+}

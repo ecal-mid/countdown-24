@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.3/Tone.js" integrity="sha512-l/S587UA2X7JyCkDqZiEX+4OC6Hp8FC0PE1MFi3+KFLk3n1lxQAtSq8YTZ4ig2YFpJal2Jhz3H3iIFyv3KScFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    <script>
+      async function loadModel() {
+          await tf.ready();
+          let m = await tf.loadLayersModel('./tfjs_model/model.json');
+          console.log('Model loaded successfully!');
+          window.dispatchEvent(new CustomEvent('modelLoaded', { detail: m }));
+
+          return m;
+          
+          // You can add code to make predictions or interact with the model here
+      }
+
+      let model;
+
+      window.onload = async function() {
+            model = await loadModel();
+
+        }
+  </script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

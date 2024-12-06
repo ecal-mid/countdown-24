@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #000;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    overflow: hidden;
+    position: relative;
+}
+
+.image-container {
+    position: absolute;
+    /* width: 300px; */
+    /* height: 300px; */
+}
+
+.image {
+    /* position: absolute; */
+    /* width: 300px;
+    height: 300px; */
+    object-fit: contain;
+    pointer-events: none;
+    display: none;
+}
+
+#rond {
+    display: block;
+}
