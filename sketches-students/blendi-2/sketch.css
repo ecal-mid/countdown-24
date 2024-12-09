@@ -1,0 +1,38 @@
+
+#startButton {
+  position: absolute;
+  top: 45%;
+  left: 42%;
+  width: 200px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  display: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#startButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#startButton {
+  animation: fadeIn 2s ease-out;
+}
