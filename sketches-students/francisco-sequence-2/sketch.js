@@ -5,7 +5,7 @@ const iframeClient = createIframeClient();
 
 const { renderer, input, math, run, finish } = createEngine();
 const { ctx, canvas } = renderer;
-run(update);
+//run(update);
 
 // Define the grid layout as 2 rows by 3 columns
 const gridWidth = 3;
@@ -153,7 +153,7 @@ function moveImageUp(clickedIndex) {
 
   if (targetIndex >= 0 && targetIndex < imagePositions.length) {
     console.log("same x, yeah.");
-    for (let i = 0; i < images.length - 1; i++) {}
+    for (let i = 0; i < images.length - 1; i++) { }
 
     const targetPosition = gridPositions[targetIndex];
 
