@@ -47,7 +47,7 @@ function setup() {
     movers.push(n);
   }
 
-  loadSVG("../../svgs/0.svg").then((svgElement) => {
+  loadSVG("./0.svg").then((svgElement) => {
     points = extractPointsFromSVG(svgElement, moversAmount); // Générer des points à partir du SVG
     svgLoaded = true;
     console.log("SVG chargé avec", points.length, "points.");
